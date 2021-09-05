@@ -1,4 +1,4 @@
-import RestauranstDAO from '../dao/restaurantDAO.js'
+import RestaurantsDAO from '../dao/restaurantDAO.js'
 export default class RestaurantsController {
     static async apiGetRestaurants(req, res, next) {
 
@@ -16,7 +16,7 @@ export default class RestaurantsController {
             filters.name = req.query.name
         }
 
-        const { restaurantsList, totalNumRestaurants } = await RestauranstDAO.getRestaurants({
+        const { restaurantsList, totalNumRestaurants } = await RestaurantsDAO.getRestaurants({
             filters,
             page,
             restaurantsPerPage
@@ -31,5 +31,29 @@ export default class RestaurantsController {
         }
         res.json(response)
 
+    }
+    static async apiGetRestaurantById(req, res, next) {
+        try {
+            let id = req.params.id || {}
+            let restaurant = await RestaurantsDAO.getRestaurantByID(id)
+            if (!restaurant) {
+                res.status(404).json({ error: "Not found" })
+                return
+            }
+            res.json(restaurant)
+        } catch (e) {
+            console.log(`api, ${e}`)
+            res.status(500).json({ error: e })
+        }
+    }
+
+    static async apiGetRestaurantCuisines(req, res, next) {
+        try {
+            let cuisines = await RestaurantsDAO.getCuisines()
+            res.json(cuisines)
+        } catch (e) {
+            console.log(`api, ${e}`)
+            res.status(500).json({ error: e })
+        }
     }
 }

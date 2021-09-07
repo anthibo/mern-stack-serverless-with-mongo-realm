@@ -28,7 +28,8 @@ export default class RestaurantDAO {
             if ("name" in filters) {
                 query = { $text: { $search: filters['name'] } }
             }
-            else if ('cusine' in filters) {
+            else if ('cuisine' in filters) {
+                console.log('searching by cuisine')
                 query = { "cuisine": { $eq: filters['cuisine'] } }
             }
             else if ('zipcode' in filters) {

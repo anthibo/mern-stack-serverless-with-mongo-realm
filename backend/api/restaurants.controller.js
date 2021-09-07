@@ -7,6 +7,7 @@ export default class RestaurantsController {
 
         let filters = {}
         if (req.query.cuisine) {
+            console.log('cuisine filter applied')
             filters.cuisine = req.query.cuisine
         }
         else if (req.query.zipcode) {
@@ -29,6 +30,7 @@ export default class RestaurantsController {
             entries_per_page: restaurantsPerPage,
             total_results: totalNumRestaurants,
         }
+        console.log(filters, response)
         res.json(response)
 
     }

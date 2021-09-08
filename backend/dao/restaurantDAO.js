@@ -68,23 +68,23 @@ export default class RestaurantDAO {
                 {
                     $lookup: {
                         from: "reviews",
-                        let: {
-                            id: "$_id",
-                        },
-                        pipeline: [
-                            {
-                                $match: {
-                                    $expr: {
-                                        $eq: ["$restaurant_id", "$$id"],
-                                    },
-                                },
-                            },
-                            {
-                                $sort: {
-                                    date: -1,
-                                },
-                            },
-                        ],
+                        localField: '_id',
+                        foreignField: 'restaurantId',
+
+                        // pipeline: [
+                        //     {
+                        //         $match: {
+                        //             $expr: {
+                        //                 $eq: ["$restaurant_id", "$$id"],
+                        //             },
+                        //         },
+                        //     },
+                        //     {
+                        //         $sort: {
+                        //             date: -1,
+                        //         },
+                        //     },
+                        // ],
                         as: "reviews",
                     },
                 },

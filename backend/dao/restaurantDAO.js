@@ -71,19 +71,7 @@ export default class RestaurantDAO {
                         localField: '_id',
                         foreignField: 'restaurantId',
 
-                        // pipeline: [
-                        //     {
-                        //         $match: {
-                        //             $expr: {
-                        //                 $eq: ["$restaurant_id", "$$id"],
-                        //             },
-                        //         },
-                        //     },
-                        //     {
-                        //         $sort: {
-                        //             date: -1,
-                        //         },
-                        //     },
+
                         // ],
                         as: "reviews",
                     },
